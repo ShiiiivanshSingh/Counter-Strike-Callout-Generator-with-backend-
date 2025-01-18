@@ -15,3 +15,42 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* Custom styles for hover animations and transparent background */
+.relative {
+  position: relative;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+/* Optional: Add custom hover effects */
+.hover\:text-yellow-500:hover {
+  color:rgb(233, 204, 204); /* Tailwind yellow color */
+}
+
+.transform {
+  transform: scale(1);
+}
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+/* App.css */
+.map-container {
+  width: 100%;
+  height: 50vh;  /* Adjust this based on your screen size preference */
+  object-fit: contain;
+}

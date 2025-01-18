@@ -12,6 +12,11 @@ module.exports = {
       backgroundImage: {
         'gradient-to-r': 'linear-gradient(to left top, #0120a8, #86009b, #c20081, #e90060, #fd073d)',
       },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        mono: ['Montserrat', 'monospace'],
+      },
     },
   },
   plugins: [],
