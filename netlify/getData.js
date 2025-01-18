@@ -2,8 +2,7 @@
 const mongoose = require('mongoose');
 // MongoDB connection string (use environment variable for security)
 // Use MongoDB Atlas connection string instead of localhost
-const uri = 'mongodb+srv://shivanshpratapsingh0807:AqJar5s8xRsOTVR2@callouts.avphp.mongodb.net/';
-
+const uri = process.env.MONGO_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
