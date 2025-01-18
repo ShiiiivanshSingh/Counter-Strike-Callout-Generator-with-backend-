@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+require('dotenv').config();  // Load environment variables
+
 const app = express();
 const PORT = 5000;
 
@@ -14,11 +16,10 @@ app.use(express.json());
 // Serve static files (e.g., images) from the "public" directory
 app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
 
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/callouts', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+// MongoDB connection (using environment variable)
+const uri = process.env.MONGO_URI;
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
