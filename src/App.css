@@ -1,0 +1,17 @@
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
