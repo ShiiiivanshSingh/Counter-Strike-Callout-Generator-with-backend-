@@ -1,7 +1,7 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 const PORT = 5000;
 
@@ -11,13 +11,16 @@ app.use(cors());
 // Middleware to parse JSON requests
 app.use(express.json());
 
+// Serve static files (e.g., images) from the "public" directory
+app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
+
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/callouts', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Callout schema
 const calloutSchema = new mongoose.Schema({
@@ -35,6 +38,7 @@ const Callout = mongoose.model('Callout', calloutSchema);
 app.get('/api/callouts', async (req, res) => {
   try {
     const callouts = await Callout.find();
+    console.log(callouts);  // Log the fetched callouts for debugging
     res.json(callouts);
   } catch (err) {
     res.status(500).json({ message: err.message });

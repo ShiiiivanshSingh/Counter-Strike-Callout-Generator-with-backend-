@@ -1,4 +1,3 @@
-// components/Hotspot.js
 import React from "react";
 
 function Hotspot({ name, top, left, onHoverStart, onHoverEnd, isActive }) {
@@ -7,7 +6,7 @@ function Hotspot({ name, top, left, onHoverStart, onHoverEnd, isActive }) {
       className={`absolute w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-200 ${
         isActive ? "scale-125" : "scale-100"
       }`}
-      style={{ top, left }}
+      style={{ top, left }} // Use top and left directly as percentages
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
     >

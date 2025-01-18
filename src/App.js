@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import MapDisplay from "./components/MapDisplay"; 
-import "./App.css"; 
+import MapDisplay from "./components/MapDisplay";
+import "./App.css";
 
 function App() {
   const [maps, setMaps] = useState([]);
@@ -11,8 +11,33 @@ function App() {
     fetch('http://localhost:5000/api/callouts')
       .then((response) => response.json())
       .then((data) => {
-        setMaps(data);
-        setSelectedMap(data[0]); // Default to the first map
+        // Group the callouts by mapName
+        const maps = {};
+
+        // Step 1: Create an object where each mapName is a key and its hotspots are values
+        data.forEach(callout => {
+          const { mapName, ...hotspot } = callout;
+
+          // Ensure mapName exists before proceeding
+          if (mapName) {
+            if (!maps[mapName]) {
+              maps[mapName] = {
+                name: mapName,
+                src: mapName.replace(' ', '_').toLowerCase() + '_radar.png', // Generate map image filename
+                hotspots: []
+              };
+            }
+
+            // Only add hotspots for a valid mapName
+            maps[mapName].hotspots.push(hotspot);
+          }
+        });
+
+        // Step 2: Convert maps object into an array
+        const formattedMaps = Object.values(maps);
+
+        setMaps(formattedMaps);
+        setSelectedMap(formattedMaps[0]); // Default to the first map
       })
       .catch((error) => console.error('Error fetching maps:', error));
   }, []);
@@ -33,19 +58,19 @@ function App() {
 
         <div className="mb-6 flex justify-center">
           <select
-            value={selectedMap.mapName}
-            onChange={(e) => setSelectedMap(maps.find(map => map.mapName === e.target.value))}
-            className="bg-white/10 text-white border border-white/20 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-white/50"
+            value={selectedMap.name}
+            onChange={(e) => setSelectedMap(maps.find(map => map.name === e.target.value))}
+            className="bg-gray-600 text-white border border-white/20 rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-white/50"
           >
             {maps.map((map) => (
-              <option key={map.mapName} value={map.mapName}>
-                {map.mapName}
+              <option key={map.name} value={map.name}>
+                {map.name}
               </option>
             ))}
           </select>
         </div>
 
-        <MapDisplay selectedMap={selectedMap} />
+        <MapDisplay map={selectedMap} />  {/* Pass the selectedMap as a prop */}
       </div>
     </div>
   );
