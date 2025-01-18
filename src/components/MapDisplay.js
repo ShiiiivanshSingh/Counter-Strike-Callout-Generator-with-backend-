@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Hotspot from "./Hotspot";
 
 function MapDisplay({ map }) {
+  const [selectedMap, setSelectedMap] = useState(null);
   const [activeCallout, setActiveCallout] = useState(null);
+
+  useEffect(() => {
+    if (map) {
+      setSelectedMap(map); // Set the selected map when the prop `map` is available
+    }
+  }, [map]);
+
+  if (!selectedMap) return <div>Loading...</div>;
 
   return (
     <div className="relative w-full flex justify-center items-center">
-      <div className="relative inline-block max-w-[70%] max-h-full"> {/* Reduced size */}
+      <div className="relative inline-block max-w-[70%] max-h-full">
         <img
-          src={map.src}
-          alt={map.name}
+          src={selectedMap.src}
+          alt={selectedMap.name}
           className="max-w-full h-auto rounded-lg shadow-2xl"
         />
-        
-        {map.hotspots.map((hotspot, index) => (
+
+        {selectedMap.hotspots && selectedMap.hotspots.map((hotspot, index) => (
           <Hotspot
             key={index}
             {...hotspot}
