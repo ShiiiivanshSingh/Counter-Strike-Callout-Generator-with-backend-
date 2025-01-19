@@ -1,46 +1,44 @@
 // netlify/functions/getCallouts.js
 require('dotenv').config();
-
 const mongoose = require('mongoose');
-// Check if the URI is being loaded correctly
 
-// Use MongoDB Atlas connection string from environment variables
+// MongoDB connection string
 const uri = process.env.MONGO_URI;
-console.log(process.env.MONGO_URI);  
+
+// Check if URI is defined
 if (!uri) {
-  throw new Error("MongoDB connection string (MONGO_URI) is undefined. Set it in your environment variables.");
+    console.error('MONGO_URI environment variable is not defined');
+    return;
 }
 
-// MongoDB connection (connect once during initialization)
+// Single MongoDB connection - removed duplicate connection
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 // Define the callout schema
 const calloutSchema = new mongoose.Schema({
-  mapName: { type: String, required: true },
-  calloutName: { type: String, required: true },
-  description: { type: String, required: true },
-  top: { type: Number, required: true },
-  left: { type: Number, required: true }
+    mapName: { type: String, required: true },
+    calloutName: { type: String, required: true },
+    description: { type: String, required: true },
+    top: { type: Number, required: true },
+    left: { type: Number, required: true }
 });
 
 // Create the Callout model
 const Callout = mongoose.model('Callout', calloutSchema);
 
-// Netlify function handler
 exports.handler = async function(event, context) {
-  try {
-    const callouts = await Callout.find();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(callouts),
-    };
-  } catch (err) {
-    console.error("Error fetching callouts:", err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: err.message }),
-    };
-  }
+    try {
+        const callouts = await Callout.find();
+        return {
+            statusCode: 200,
+            body: JSON.stringify(callouts)
+        };
+    } catch (err) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: err.message })
+        };
+    }
 };
