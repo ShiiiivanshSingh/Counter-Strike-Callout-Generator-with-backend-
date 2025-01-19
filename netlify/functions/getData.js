@@ -1,17 +1,13 @@
-// netlify/functions/getCallouts.js
-require('dotenv').config();
 const mongoose = require('mongoose');
 
 // MongoDB connection string
-const uri = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI; // Use the environment variable set in Netlify
 
-// Check if URI is defined
 if (!uri) {
     console.error('MONGO_URI environment variable is not defined');
     return;
 }
 
-// Single MongoDB connection - removed duplicate connection
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
