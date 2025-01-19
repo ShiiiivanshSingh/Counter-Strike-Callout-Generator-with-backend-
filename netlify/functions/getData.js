@@ -1,14 +1,17 @@
 // netlify/functions/getCallouts.js
+require('dotenv').config();
+
 const mongoose = require('mongoose');
-// MongoDB connection string (use environment variable for security)
-// Use MongoDB Atlas connection string instead of localhost
-const uri = 'mongodb+srv://shivanshpratapsingh0807:AqJar5s8xRsOTVR2@callouts.avphp.mongodb.net /';
+// Check if the URI is being loaded correctly
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Use MongoDB Atlas connection string from environment variables
+const uri = process.env.MONGO_URI;
+console.log(process.env.MONGO_URI);  
+if (!uri) {
+  throw new Error("MongoDB connection string (MONGO_URI) is undefined. Set it in your environment variables.");
+}
 
-// MongoDB connection
+// MongoDB connection (connect once during initialization)
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
@@ -25,17 +28,19 @@ const calloutSchema = new mongoose.Schema({
 // Create the Callout model
 const Callout = mongoose.model('Callout', calloutSchema);
 
+// Netlify function handler
 exports.handler = async function(event, context) {
   try {
     const callouts = await Callout.find();
     return {
       statusCode: 200,
-      body: JSON.stringify(callouts)
+      body: JSON.stringify(callouts),
     };
   } catch (err) {
+    console.error("Error fetching callouts:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: err.message })
+      body: JSON.stringify({ message: err.message }),
     };
   }
 };
