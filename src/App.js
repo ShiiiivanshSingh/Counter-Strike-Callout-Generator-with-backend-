@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
 
     // Fetch maps data from the backend API
-    fetch('ttps://callouts-gg.netlify.app/api/callouts') // Change to your API URL
+    fetch('https://callouts-gg.netlify.app/.netlify/functions/getData') // Change to your API URL
       .then((response) => response.json())
       .then((data) => {
         if (data.length === 0) {
