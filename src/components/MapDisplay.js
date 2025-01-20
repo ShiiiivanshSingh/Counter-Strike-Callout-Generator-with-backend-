@@ -46,7 +46,7 @@ function MapDisplay({ map }) {
 
   return (
     <div className="relative w-full flex justify-center items-center">
-      <div className="relative inline-block max-w-[70%] max-h-full">
+      <div className="relative inline-block max-w-full max-h-full">
         <img
           src={mapImage} // Use the map image dynamically
           alt={selectedMap.name || "Map"}
