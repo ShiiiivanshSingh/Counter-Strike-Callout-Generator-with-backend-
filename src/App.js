@@ -43,7 +43,7 @@ function App() {
     return (
       <div className="custom-loading-spinner min-h-screen bg-gradient-to-br from-[#fd073d] to-[#0120a8]">
         <div className="spinner"></div>
-        <p className="loading-text centre text-center mb-8 text-4xl font-bold text-white animate-fade-out"> Get ready, callout incoming! 
+        <p className="loading-text centre text-center mb-8 text-4xl font-bold text-white "> Get ready, callout incoming! 
 </p>
  </div>
     );

@@ -87,12 +87,3 @@ h2 {
   transform: translate(-50%, -50%);
   animation: fadeOut 2s forwards;
 }
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
