@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MapDisplay from "./components/MapDisplay"; // Assuming this component is present
+import MapDisplay from "./components/MapDisplay"; 
 import "./App.css";
 
 function App() {
@@ -8,35 +8,26 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
-    // Fetch maps data from the backend API
-    fetch('https://callouts-gg.netlify.app/.netlify/functions/getData') // Change to your API URL
+    // Fetch maps data 
+    fetch(".netlify/functions/getCall") // API endpoint
       .then((response) => response.json())
       .then((data) => {
-        if (data.length === 0) {
+        console.log(data); // Log the response data to inspect it
+        
+        if (data.mongooseResults.length === 0) {
           setError('No maps available.');
           return;
         }
 
-        // Group callouts by map name
-        const maps = {};
-        data.forEach(callout => {
-          const { mapName, ...hotspot } = callout;
-          if (mapName) {
-            if (!maps[mapName]) {
-              maps[mapName] = {
-                name: mapName,
-                src: `/images/maps/${mapName.replace(' ', '_').toLowerCase()}_radar.png`,
-                hotspots: []
-              };
-            }
-            maps[mapName].hotspots.push(hotspot);
-          }
-        });
+        // Group maps by map name
+        const maps = data.mongooseResults.map(callout => ({
+          name: callout.mapName,
+          src: callout.src,
+          hotspots: callout.hotspots
+        }));
 
-        const formattedMaps = Object.values(maps);
-        setMaps(formattedMaps);
-        setSelectedMap(formattedMaps[0]); // Default to the first map
+        setMaps(maps);
+        setSelectedMap(maps[0]); // Set the first map as the default
       })
       .catch((err) => {
         console.error('Error fetching maps:', err);
