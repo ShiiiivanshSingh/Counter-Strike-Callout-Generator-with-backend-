@@ -39,7 +39,7 @@ function MapDisplay({ map }) {
     }
   }, [map]);
 
-  if (!selectedMap) return <div>Loading...</div>;
+  if (!selectedMap) return <div className="text-white ">.</div>;
 
   // Get the map image based on map name from mapImages
   const mapImage = mapImages[selectedMap.name] || "../assets/maps/def.png";  // Fallback if no match

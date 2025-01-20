@@ -21,8 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon server.js",
-    "postinstall": "npm install"
+    "dev": "nodemon server.js"
   },
   "eslintConfig": {
     "extends": [
