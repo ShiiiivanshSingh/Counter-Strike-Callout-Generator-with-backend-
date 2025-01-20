@@ -54,10 +54,15 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-[#fd073d] to-[#0120a8]">
       <div className="container mx-auto px-4 py-8">
         <div className="relative text-center mb-8">
-          <h1 className="text-4xl font-bold text-white hover:text-yellow-500 transition-transform duration-300">
+        <div className="absolute inset-0 bg-white opacity-0 rounded-lg z-0"></div>
+          
+         
+          <h1 className="text-4xl font-bold text-white z-10 hover:text-yellow-500 transform transition-transform duration-300 hover:scale-110">
             Counter-Strike Callouts
           </h1>
-          <h2 className="text-2xl text-white hover:text-yellow-500 transition-transform duration-300">
+          
+          
+          <h2 className="text-2xl text-white z-10 hover:text-yellow-500 transform transition-transform duration-300 hover:scale-105">
             Because every callout tells a tale.
           </h2>
         </div>
