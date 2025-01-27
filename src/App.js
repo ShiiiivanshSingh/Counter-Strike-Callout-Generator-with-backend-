@@ -184,7 +184,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-screen max-w-[100vw] overflow-x-hidden transition-colors duration-300 ${isDarkMode ? 'dark' : 'light'}" style={backgroundStyle}>
+    <div className={`min-h-screen w-screen max-w-[100vw] overflow-x-hidden transition-colors duration-300 ${isDarkMode ? 'dark' : 'light'}`} style={backgroundStyle}>
       {/* Theme Toggle and Menu Buttons */}
       <div className="fixed top-4 right-4 flex items-center gap-4 z-50">
         <button
