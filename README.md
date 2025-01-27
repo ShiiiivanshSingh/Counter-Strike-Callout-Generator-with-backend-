@@ -2,9 +2,7 @@
 
 <h1 align="center" id="title">Counter Strike Callouts</h1>
 
-<p align="center"><img src="https://socialify.git.ci/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry/image?custom_description=Team+SAPP-1176&amp;description=1&amp;language=1&amp;name=1&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
-
-
+![Counter-Strike-Map-Callout-Guide](https://socialify.git.ci/ShiiiivanshSingh/Counter-Strike-Map-Callout-Guide/image?font=KoHo&language=1&name=1&owner=1&pattern=Transparent&stargazers=1&theme=Dark)
 <h1 align="center">🚀 Demo</h1>
 
 
