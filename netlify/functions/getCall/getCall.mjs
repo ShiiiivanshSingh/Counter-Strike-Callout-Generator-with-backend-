@@ -1,10 +1,28 @@
 import mongoose from 'mongoose';
 
-const uri = process.env.MONGO_URI;  // Make sure MONGO_URI is set as an environment variable
+// Parse and sanitize MongoDB URI
+const parseMongoURI = (uri) => {
+  try {
+    const sanitizedUri = uri.replace(
+      /(mongodb:\/\/)([^:]+):([^@]+)@/,
+      (match, protocol, username, password) => {
+        const encodedUsername = encodeURIComponent(username);
+        const encodedPassword = encodeURIComponent(password);
+        return `${protocol}${encodedUsername}:${encodedPassword}@`;
+      }
+    );
+    return sanitizedUri;
+  } catch (error) {
+    console.error('Error parsing MongoDB URI:', error);
+    return uri;
+  }
+};
+
+const uri = parseMongoURI(process.env.MONGO_URI);
 
 if (!uri) {
   console.error('MongoDB URI is not provided!');
-  process.exit(1);  // Exit if MongoDB URI is not found
+  process.exit(1);
 }
 
 // Singleton pattern to reuse the MongoDB connection
@@ -12,14 +30,20 @@ let cachedDb = null;
 
 async function connectToDatabase() {
   if (cachedDb) {
-    // Return the cached connection if it exists
     return cachedDb;
   }
 
-  // Otherwise, establish a new connection and cache it
   const db = await mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    serverApi: {
+      version: '1',
+      strict: true,
+      deprecationErrors: true,
+    },
+    maxPoolSize: 10,
+    connectTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
   });
 
   cachedDb = db;
@@ -27,7 +51,7 @@ async function connectToDatabase() {
   return cachedDb;
 }
 
-// Define schema and model with explicit collection name (map_data)
+// Define schema and model
 const mapDataSchema = new mongoose.Schema({
   mapName: { type: String, required: true },
   src: { type: String, required: true },
@@ -37,36 +61,42 @@ const mapDataSchema = new mongoose.Schema({
     top: { type: String, required: true },
     left: { type: String, required: true },
   }],
-}, { collection: 'map_data' });
+}, { 
+  collection: 'map_data',
+  timestamps: true 
+});
 
 const MapData = mongoose.model('MapData', mapDataSchema);
 
-// Handler function for the serverless function
+// Handler function
 export async function handler(event, context) {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   try {
-    const db = await connectToDatabase();  // Connect to the DB
+    const db = await connectToDatabase();
 
     console.log('Connection state:', mongoose.connection.readyState);
-
-    // Get the current database name
-    const dbName = mongoose.connection.db.databaseName || 'Unknown database';  // Fallback if databaseName isn't available
+    const dbName = mongoose.connection.db.databaseName || 'Unknown database';
     console.log('Connected to database:', dbName);
 
-    // List all collections
     const collections = await mongoose.connection.db.listCollections().toArray();
     console.log('Available collections:', collections.map(c => c.name));
 
-    // Perform Mongoose query
-    const mongooseResults = await MapData.find({});
+    const mongooseResults = await MapData.find({}).lean().exec();
     console.log('Mongoose query results count:', mongooseResults.length);
 
-    // Prepare and send the response
     return {
       statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Cache-Control': 'public, max-age=300'
+      },
       body: JSON.stringify({
-        database: dbName,
-        collections: collections.map(c => c.name),
-        mongooseResults,
+        success: true,
+        data: mongooseResults
       }),
     };
   } catch (err) {
@@ -78,7 +108,30 @@ export async function handler(event, context) {
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Cache-Control': 'no-cache'
+      },
+      body: JSON.stringify({ 
+        success: false,
+        error: err.message 
+      }),
     };
   }
 }
+
+// Connection event handlers
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
+
+mongoose.connection.on('connected', () => {
+  console.log('MongoDB connected successfully');
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected');
+});

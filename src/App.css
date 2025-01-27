@@ -66,19 +66,49 @@ h2 {
 }
 
 .spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
+/* Add smooth scrolling to the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Add backdrop blur to the whole page */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
 
 .loading-text {
   position: absolute;
@@ -86,4 +116,427 @@ h2 {
   left: 50%;
   transform: translate(-50%, -50%);
   animation: fadeOut 2s forwards;
+}
+
+/* Add these new animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.slide-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+/* Improve spinner */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Improve scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Improve backdrop blur */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhance dropdown styling */
+select option {
+  background-color: #219ebc;
+  color: white;
+  padding: 8px;
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Enhanced backdrop blur */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Improved loading animation */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Enhanced hover effects */
+.hover\:bg-opacity-90:hover {
+  background-color: rgba(251, 133, 0, 0.9);
+}
+
+.hover\:text-yellow-500:hover {
+  color: #ffb703;
+}
+
+/* Improved scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Update color variables */
+:root {
+  --light-primary: #f5ebe0;
+  --light-text: #14213d;
+  --dark-primary: #14213d;
+  --dark-text: #ffffff;
+  --accent: #ffb703;
+  --accent-hover: #fb8500;
+}
+
+/* Update spinner colors */
+.spinner {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+}
+
+/* Update scrollbar colors */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Update select styling */
+select option {
+  background-color: #219ebc;
+  color: white;
+  padding: 8px;
+}
+
+/* Enhanced hover effects */
+.hover\:bg-opacity-90:hover {
+  background-color: rgba(251, 133, 0, 0.9);
+}
+
+.hover\:text-yellow-500:hover {
+  color: #ffb703;
+}
+
+/* Dark mode styles */
+.dark {
+  color-scheme: dark;
+}
+
+.dark .bg-white {
+  background-color: var(--dark-primary);
+}
+
+.dark .text-white {
+  color: var(--dark-text);
+}
+
+.dark select {
+  background-color: var(--dark-secondary);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark select option {
+  background-color: var(--dark-primary);
+  color: white;
+}
+
+.dark .spinner {
+  border-color: rgba(142, 202, 230, 0.3);
+  border-top-color: var(--dark-text);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(142, 202, 230, 0.1);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(142, 202, 230, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(142, 202, 230, 0.5);
+}
+
+/* Hover effects in dark mode */
+.dark .hover\:bg-opacity-90:hover {
+  background-color: var(--accent-hover);
+}
+
+.dark .hover\:text-yellow-500:hover {
+  color: var(--accent);
+}
+
+/* Glass effect modifications for dark mode */
+.dark .backdrop-blur-md {
+  background-color: rgba(20, 33, 61, 0.2);
+}
+
+/* Animation modifications for dark mode */
+.dark .animate-pulse {
+  animation: darkPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes darkPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .3;
+  }
+}
+
+/* Button styles for dark mode */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Remove duplicate styles and clean up */
+.dark {
+  color-scheme: dark;
+}
+
+/* Ensure text is always white in both modes */
+.text-white, 
+.dark .text-white {
+  color: white !important;
+}
+
+/* Update select styling for both modes */
+select,
+.dark select {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: currentColor;
+  border-color: currentColor;
+  border-opacity: 0.2;
+}
+
+select option,
+.dark select option {
+  background-color: var(--light-primary);
+  color: var(--light-text);
+  padding: 8px;
+}
+
+.dark select option {
+  background-color: var(--dark-primary);
+}
+
+/* Glass effect for both modes */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Spinner colors */
+.spinner,
+.dark .spinner {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+}
+
+/* Scrollbar colors */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Button hover effects */
+.hover\:bg-opacity-90:hover {
+  background-color: var(--accent-hover);
+}
+
+.hover\:text-accent:hover {
+  color: var(--accent);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Animation for both modes */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Transitions */
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Light mode specific styles */
+.light {
+  color-scheme: light;
+}
+
+.light .text-white {
+  color: var(--light-text) !important;
+}
+
+.light select {
+  background-color: rgba(20, 33, 61, 0.1);
+  color: var(--light-text);
+  border-color: rgba(20, 33, 61, 0.2);
+}
+
+.light select option {
+  background-color: var(--light-primary);
+  color: var(--light-text);
+}
+
+.light .backdrop-blur-md {
+  background-color: rgba(245, 235, 224, 0.3);
+}
+
+/* Update scrollbar for light mode */
+.light ::-webkit-scrollbar-track {
+  background: rgba(20, 33, 61, 0.1);
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(20, 33, 61, 0.2);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(20, 33, 61, 0.3);
+}
+
+/* Spinner colors for light mode */
+.light .spinner {
+  border-color: rgba(20, 33, 61, 0.2);
+  border-top-color: var(--light-text);
 }
