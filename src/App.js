@@ -427,7 +427,7 @@ function App() {
             <div className="text-center transform transition-transform hover:scale-105">
               <h3 className="text-white text-xl font-bold mb-4 flex items-center justify-center gap-2">
                 <FaBomb className="text-[#ffb703]" />
-                Quick Facts
+                Lingo-Strike
               </h3>
               <div 
                 className="text-white/80 p-4 rounded-lg hover:bg-white/5 cursor-pointer transition-all"
