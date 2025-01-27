@@ -214,7 +214,7 @@ function App() {
             <div className="p-4">
               <div className="space-y-4">
                 <a
-                  href="https://github.com/yourusername/Counter-Strike-Map-Callout-Guide"
+                  href="https://github.com/ShiiiivanshSingh/Counter-Strike-Map-Callout-Guide"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-white hover:text-[#ffb703] transition-all p-2 rounded-lg hover:bg-white/5"
@@ -223,7 +223,7 @@ function App() {
                   <span>View on GitHub</span>
                 </a>
                 <a
-                  href="https://twitter.com/yourusername"
+                  href="https://x.com/de_mirage_fan"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-white hover:text-[#ffb703] transition-all p-2 rounded-lg hover:bg-white/5"
@@ -232,7 +232,7 @@ function App() {
                   <span>Follow on Twitter</span>
                 </a>
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.linkedin.com/in/shivansh-pratap-singh-23b3b92b1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-white hover:text-[#ffb703] transition-all p-2 rounded-lg hover:bg-white/5"
@@ -397,7 +397,7 @@ function App() {
               </h3>
               <div className="flex gap-4 justify-center md:justify-start">
                 <a
-                  href="https://github.com/yourusername"
+                  href="https://github.com/ShiiiivanshSingh"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-[#ffb703] transition-all transform hover:scale-110"
@@ -405,7 +405,7 @@ function App() {
                   <FaGithub className="text-2xl" />
                 </a>
                 <a
-                  href="https://twitter.com/yourusername"
+                  href="https://x.com/de_mirage_fan"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-[#ffb703] transition-all transform hover:scale-110"
@@ -413,7 +413,7 @@ function App() {
                   <FaTwitter className="text-2xl" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.linkedin.com/in/shivansh-pratap-singh-23b3b92b1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-[#ffb703] transition-all transform hover:scale-110"
@@ -423,7 +423,7 @@ function App() {
               </div>
             </div>
 
-            {/* Middle Column - CS:GO References */}
+          
             <div className="text-center transform transition-transform hover:scale-105">
               <h3 className="text-white text-xl font-bold mb-4 flex items-center justify-center gap-2">
                 <FaBomb className="text-[#ffb703]" />
