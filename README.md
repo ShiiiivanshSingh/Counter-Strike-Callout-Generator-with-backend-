@@ -16,7 +16,7 @@
 
 Here're some of the project's best features:
 
-*   resizable Maps
+*   Resizable Maps
 *   Dark/Light Theme Support
 *   Responsive UI
 *   Cool Easter Eggs
